@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Add Trainer";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card p-4 shadow">
+            <h3 class="text-center mb-3">Add New Trainer</h3>
+            <form method="post">
+                <div class="mb-3">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label>Specialty</label>
+                    <input type="text" name="specialty" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-success w-100">Save</button>
+            </form>
+            <a href="/Admin/Trainers" class="btn btn-secondary w-100 mt-2">Back</a>
+        </div>
+    </div>
+</div>

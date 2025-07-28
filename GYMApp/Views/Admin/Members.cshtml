@@ -1,0 +1,47 @@
+﻿@model System.Data.DataTable
+@{
+    ViewData["Title"] = "Manage Members";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Members</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <a href="/Admin/AddMember" class="btn btn-primary mb-3">Add Member</a>
+
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Join Date</th>
+                <th>Subscription Ends</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["Name"]</td>
+                    <td>@row["Email"]</td>
+                    <td>@Convert.ToDateTime(row["JoinDate"]).ToShortDateString()</td>
+                    <td>@Convert.ToDateTime(row["SubscriptionEndDate"]).ToShortDateString()</td>
+                    <td>
+                        <a href="/Admin/EditMember/@row["MemberId"]" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/Admin/DeleteMember/@row["MemberId"]" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure to delete this member?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

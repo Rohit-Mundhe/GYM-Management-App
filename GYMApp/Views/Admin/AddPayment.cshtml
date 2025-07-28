@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Record Payment";
+    var members = ViewBag.Members as System.Data.DataTable;
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card p-4 shadow">
+            <h3 class="text-center mb-3">Record a Payment</h3>
+            <form method="post">
+                <div class="mb-3">
+                    <label>Member</label>
+                    <select name="memberId" class="form-control" required>
+                        <option value="">-- Select Member --</option>
+                        @foreach (System.Data.DataRow row in members.Rows)
+                        {
+                            <option value="@row["MemberId"]">@row["Name"]</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Amount (₹)</label>
+                    <input type="number" name="amount" step="0.01" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label>Status</label>
+                    <select name="status" class="form-control">
+                        <option value="Paid">Paid</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Save Payment</button>
+            </form>
+            <a href="/Admin/Payments" class="btn btn-secondary w-100 mt-2">Back</a>
+        </div>
+    </div>
+</div>

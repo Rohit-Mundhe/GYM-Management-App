@@ -1,0 +1,31 @@
+﻿@model System.Data.DataTable
+@{
+    ViewData["Title"] = "Trainer Dashboard";
+}
+
+<h3 class="mt-3">Your Assigned Members</h3>
+<table class="table table-hover table-striped shadow">
+    <thead class="table-primary">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Assign Workout</th>
+            <th>Assign Diet</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow row in Model.Rows)
+        {
+            <tr>
+                <td>@row["Name"]</td>
+                <td>@row["Email"]</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="/Trainer/AssignWorkout?memberId=@row["MemberId"]">Workout</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-success" href="/Trainer/AssignDiet?memberId=@row["MemberId"]">Diet</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

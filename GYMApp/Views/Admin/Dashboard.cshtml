@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card p-4 text-center">
+            <h4>Total Members</h4>
+            <h2 class="text-primary">@ViewBag.TotalMembers</h2>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-4 text-center">
+            <h4>Total Trainers</h4>
+            <h2 class="text-success">@ViewBag.TotalTrainers</h2>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="/Admin/Members" class="btn btn-outline-primary">Manage Members</a>
+    <a href="/Admin/Trainers" class="btn btn-outline-secondary">Manage Trainers</a>
+    <a href="/Admin/Payments" class="btn btn-outline-success">View Payments</a>
+</div>

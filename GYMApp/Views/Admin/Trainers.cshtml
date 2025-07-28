@@ -1,0 +1,45 @@
+﻿@model System.Data.DataTable
+@{
+    ViewData["Title"] = "Manage Trainers";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Trainers</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <a href="/Admin/AddTrainer" class="btn btn-success mb-3">Add Trainer</a>
+
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Specialty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["Name"]</td>
+                    <td>@row["Email"]</td>
+                    <td>@row["Specialty"]</td>
+                    <td>
+                        <a href="/Admin/EditTrainer/@row["TrainerId"]" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/Admin/DeleteTrainer/@row["TrainerId"]" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure to delete this trainer?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,32 @@
+﻿@model DietPlan
+@{
+    ViewData["Title"] = "Assign Diet Plan";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4 mt-4 shadow">
+            <h3 class="text-center">Assign Diet Plan</h3>
+            <form method="post">
+                <input type="hidden" name="MemberId" value="@Model.MemberId" />
+
+                <div class="mb-3">
+                    <label>Diet Details</label>
+                    <textarea name="DietDetails" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>Start Date</label>
+                    <input type="date" name="StartDate" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>End Date</label>
+                    <input type="date" name="EndDate" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Assign Diet</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@model System.Data.DataTable
+@{
+    ViewData["Title"] = "Payments";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Payment Records</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
+    <a href="/Admin/AddPayment" class="btn btn-primary mb-3">Record New Payment</a>
+
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Member</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Update Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["MemberName"]</td>
+                    <td>$@row["Amount"]</td>
+                    <td>@Convert.ToDateTime(row["PaymentDate"]).ToShortDateString()</td>
+                    <td>@row["Status"]</td>
+                    <td>
+                        <a href="/Admin/UpdatePaymentStatus/@row["PaymentId"]"
+                           class="btn btn-sm btn-warning">Update</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,102 @@
+﻿@model System.Data.DataSet
+@using System.Data
+@using System.Linq
+@{
+    ViewData["Title"] = "Member Dashboard";
+
+    var memberInfo = Model.Tables[0].Rows[0];
+    var workouts = Model.Tables[1];
+    var diets = Model.Tables[2];
+    var attendance = Model.Tables[3];
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Welcome, @memberInfo["Name"]!</h2>
+
+    <div class="row g-4 mb-4">
+       
+        <!-- Attendance Summary -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">Attendance Summary</div>
+                <div class="card-body">
+                    @{
+                        int attended = attendance.AsEnumerable().Count(r => r["Status"].ToString() == "Present");
+                        int total = attendance.Rows.Count;
+                        int percent = total > 0 ? (attended * 100 / total) : 0;
+                    }
+                    <p>@attended / @total days attended</p>
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: @percent%" aria-valuenow="@percent" aria-valuemin="0" aria-valuemax="100">@percent%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Placeholder Progress Overview -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">Progress Overview</div>
+                <div class="card-body">
+                    <p>Progress charts will appear here.</p>
+                    <!-- Integrate Chart.js or other chart libraries here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Workout Schedule -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">Workout Schedule</div>
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Workout</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DataRow row in workouts.Rows)
+                            {
+                            <tr>
+                                <td>@Convert.ToDateTime(row["ScheduleDate"]).ToShortDateString()</td>
+                                <td>@row["Description"]</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diet Plans -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">Diet Plans</div>
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Meal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DataRow row in diets.Rows)
+                            {
+                                <tr>
+                                    <td>@Convert.ToDateTime(row["StartDate"]).ToShortDateString() - @Convert.ToDateTime(row["EndDate"]).ToShortDateString()</td>
+                                    <td>@row["DietDetails"]</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

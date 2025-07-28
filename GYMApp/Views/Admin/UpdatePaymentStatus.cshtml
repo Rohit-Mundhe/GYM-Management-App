@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Update Payment Status";
+    var row = (System.Data.DataRow)Model;
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card p-4 shadow">
+            <h3 class="text-center mb-3">Update Payment Status</h3>
+            <form method="post">
+                <input type="hidden" name="id" value="@row["PaymentId"]" />
+                <div class="mb-3">
+                    <label>Member</label>
+                    <input type="text" class="form-control" value="@row["MemberName"]" disabled />
+                </div>
+                <div class="mb-3">
+                    <label>Amount</label>
+                    <input type="text" class="form-control" value="$@row["Amount"]" disabled />
+                </div>
+                <div class="mb-3">
+                    <label>Date</label>
+                    <input type="text" class="form-control"
+                           value="@Convert.ToDateTime(row["PaymentDate"]).ToShortDateString()" disabled />
+                </div>
+                <div class="mb-3">
+                    <label>Status</label>
+                    <select name="status" class="form-control">
+                        <option value="Paid" selected="@(row["Status"].ToString() == "Paid")">Paid</option>
+                        <option value="Pending" selected="@(row["Status"].ToString() == "Pending")">Pending</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Update Status</button>
+            </form>
+            <a href="/Admin/Payments" class="btn btn-secondary w-100 mt-2">Back</a>
+        </div>
+    </div>
+</div>
