@@ -4,30 +4,109 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Gym Management</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            min-height: 100vh;
+            color: #fff;
         }
 
         .navbar {
-            background-color: #0d6efd;
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .navbar-brand, .nav-link, .navbar-text {
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
             color: #fff !important;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+            .nav-link:hover {
+                color: #ffd700 !important;
+            }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+
+        .hero-text {
+            background: rgba(0,0,0,0.6);
+            padding: 2rem 3rem;
+            border-radius: 1rem;
         }
 
         .card {
-            box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+            background: #232526;
+            color: #fff;
+            border: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px) scale(1.03);
+                box-shadow: 0 6px 24px rgba(255,81,47,0.2);
+            }
+
+        .btn-primary, .btn-success, .btn-warning {
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%);
+            color: #232526;
+        }
+
+        .btn-warning {
+            background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+            color: #232526;
+        }
+
+        .table-dark {
+            background: #232526;
+            color: #ffd700;
+        }
+
+        .alert-success, .alert-danger {
+            font-weight: 500;
+            border-radius: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg mb-4">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="/">GymApp</a>
-            <div class="collapse navbar-collapse">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/Account/Login">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Account/Register">Register</a></li>
@@ -37,7 +116,15 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-text text-center">
+                <h1 class="display-4 fw-bold mb-3" style="color:#ffd700;">Transform Your Fitness Journey</h1>
+                <p class="lead mb-4">Join our gym portal and unlock personalized workouts, expert trainers, and real-time progress tracking. Your transformation starts here!</p>
+                <a href="/Account/Register" class="btn btn-primary btn-lg">Get Started</a>
+            </div>
+        </div>
         @RenderBody()
     </div>
 
